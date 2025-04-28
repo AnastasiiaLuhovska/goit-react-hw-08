@@ -5,6 +5,12 @@ const instance = axios.create({
     baseURL: 'https://connections-api.goit.global/'
 })
 
-const signUp = createAsyncThunk('singUp', ()=>{
+export const signUp = createAsyncThunk('singUp', async (data, thunkAPI)=>{
+    try{
+        const response = await instance.post('users/signup', data)
+        return response
+    }catch(error){
+        return thunkAPI.rejectWithValue(error.message)
+    }
 
 })
