@@ -1,26 +1,20 @@
 import './App.css'
-import ContactForm from "./components/ContactForm.jsx";
-import ContactList from "./components/ContactList.jsx";
-import SearchBox from "./components/SearchBox.jsx";
-import {useDispatch} from "react-redux";
-import {useEffect} from "react";
-import {fetchData} from "./redux/contactsOps.js";
+import Header from "./components/Header/Header.jsx";
+import {Route, Routes} from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 
 function App() {
 
-    const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(fetchData())
-    }, [dispatch])
-
-    return (
-    <div className='phonebook'>
-      <h1>Phonebook</h1>
-      <ContactForm/>
-        <SearchBox />
-      <ContactList />
-    </div>
-  )
+    return <>
+            <Header/>
+        <Routes>
+            <Route path='/' element={<HomePage/>}/>
+            <Route path='/login' element={<LoginPage/>}/>
+            <Route path='/register' element={<RegisterPage/>}/>
+        </Routes>
+        </>
 }
 
 export default App

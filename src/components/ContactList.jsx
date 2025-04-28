@@ -1,5 +1,5 @@
 import Contact from "./Contact.jsx";
-import {selectError, selectFilter, selectFilteredContacts, selectLoading} from "../redux/contactsSlice.js";
+import {selectError, selectFilter, selectFilteredContacts, selectLoading} from "../redux/silce.js";
 import {useSelector} from "react-redux";
 import Loader from "./Loader.jsx";
 
