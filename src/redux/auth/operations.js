@@ -1,16 +1,26 @@
-import axios from "axios";
 import {createAsyncThunk} from "@reduxjs/toolkit";
+import {instance} from '../../api/api.js'
 
-const instance = axios.create({
-    baseURL: 'https://connections-api.goit.global/'
-})
-
-export const signUp = createAsyncThunk('singUp', async (data, thunkAPI)=>{
+const addToken = (token)=>{
+    instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+export const signUp = createAsyncThunk('singUp', async (user, thunkAPI)=>{
     try{
-        const response = await instance.post('users/signup', data)
-        return response
+        const {data} = await instance.post('/users/signup', user)
+        addToken(data.token)
+        return data
     }catch(error){
         return thunkAPI.rejectWithValue(error.message)
     }
 
+})
+
+export const login = createAsyncThunk('login', async (user, thunkAPI)=>{
+    try{
+        const {data} = await instance.post('/users/login', user)
+        addToken(data.token)
+        return data
+    }catch(error){
+        thunkAPI.rejectWithValue(error.message)
+    }
 })

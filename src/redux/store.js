@@ -1,7 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {contactsReducer} from "./contacts/silce.js";
+import {contactsReducer} from "./contacts/slice.js";
 import {filterReducer} from "./filters/slice.js";
-import {authReducers} from "./auth/slice.js";
+import {authReducer} from "./auth/slice.js";
 
 
 
@@ -9,7 +9,7 @@ import {authReducers} from "./auth/slice.js";
     reducer:{
         contacts: contactsReducer,
         filters: filterReducer,
-        auth: authReducers
+        auth: authReducer,
     }
 })
 

@@ -4,7 +4,7 @@ import s from './ContactForm.module.css'
 import * as Yup from 'yup'
 
 import {useDispatch} from "react-redux";
-import {postData} from "../redux/operations.js";
+import {postData} from "../../redux/contacts/operations.js";
 
 const ContactForm = () => {
 

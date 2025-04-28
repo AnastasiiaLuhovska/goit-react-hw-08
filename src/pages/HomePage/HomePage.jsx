@@ -1,6 +1,6 @@
 const HomePage = () => {
     return <div>
-        <p>Welcome to task manager</p>
+        <p>Welcome to contacts manager</p>
     </div>;
 };
 

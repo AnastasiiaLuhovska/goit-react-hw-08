@@ -1,18 +1,47 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {signUp} from './operations.js'
+import {login, signUp} from './operations.js'
 
 const slice = createSlice({
-    name: 'user',
+    name: 'auth',
     initialState: {
-        name:'',
-        email: '',
-        password: ''
+        isLoggedIn: false,
+        user:{
+            name:'',
+            email: ''
+        },
+        token: null,
+        error: null,
+        isLoading: false
     },
     extraReducers: (builder)=>{
         builder.addCase(signUp.fulfilled, (state, action)=>{
-            state = action.payload
+            state.user = action.payload.user
+            state.token = action.payload.token
+            state.isLoggedIn = true
+            state.isLoading = false
         })
+            .addCase(signUp.rejected, (state, action)=>{
+                state.error = action.payload
+                state.isLoading = false
+            })
+            .addCase(signUp.pending, (state)=>{
+                state.isLoading = true
+            })
+            .addCase(login.fulfilled, (state, action)=>{
+                state.user = action.payload.user
+                state.token = action.payload.token
+                state.isLoggedIn = true
+                state.isLoading = false
+
+            } )
+            .addCase(login.rejected, (state, action)=>{
+                state.error = action.payload
+                state.isLoading = false
+        })
+            .addCase (login.pending, (state)=>{
+                state.isLoading = true
+            })
     }
 })
 
-export const authReducers = slice.reducer
+export const authReducer = slice.reducer

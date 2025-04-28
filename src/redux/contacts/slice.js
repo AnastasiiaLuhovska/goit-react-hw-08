@@ -1,4 +1,4 @@
-import {createSelector, createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {deleteData, fetchData, postData} from "./operations.js";
 
 const initialState =  {
@@ -7,7 +7,7 @@ const initialState =  {
     error: null
 }
 
- export const silce = createSlice({
+ export const slice = createSlice({
      name:'contacts',
      initialState,
 
@@ -51,14 +51,6 @@ const initialState =  {
              })
      }
  })
-export const contactsReducer = silce.reducer
+export const contactsReducer = slice.reducer
 
-export const selectContacts = state => state.contacts.items
-export const selectLoading = state => state.contacts.isLoading
-export const selectError = state => state.contacts.error
-export const selectFilter = state => state.filters.name
 
-export const selectFilteredContacts = createSelector([selectContacts, selectFilter], (contacts, filter)=>{
-    return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()) || contact.number.toLowerCase().includes(filter.toLowerCase()))
-    }
-)

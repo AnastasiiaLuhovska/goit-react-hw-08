@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
+import {instance} from '../../api/api.js'
 
-export const fetchData = createAsyncThunk('fetchAll', async(_, thunkAPI)=>{
+export const fetchData = createAsyncThunk('fetchAll', async(query, thunkAPI)=>{
     try{
-        const {data} = await axios.get('https://68076fb6e81df7060eba4161.mockapi.io/contacts/contact')
+        const {data} = await instance.get('/contacts')
         return data
     }catch(error){
         return  thunkAPI.rejectWithValue(error.message)
@@ -12,7 +12,7 @@ export const fetchData = createAsyncThunk('fetchAll', async(_, thunkAPI)=>{
 
 export const postData = createAsyncThunk('post', async(contact, thunkAPI)=>{
     try{
-        const {data} = await axios.post('https://68076fb6e81df7060eba4161.mockapi.io/contacts/contact', contact)
+        const {data} = await instance.post('/contacts', contact)
         return data
     }catch(error){
         return thunkAPI.rejectWithValue(error.message)
@@ -21,7 +21,7 @@ export const postData = createAsyncThunk('post', async(contact, thunkAPI)=>{
 
 export const deleteData = createAsyncThunk('delete', async(id, thunkAPI)=>{
     try{
-        const {data} = await axios.delete(`https://68076fb6e81df7060eba4161.mockapi.io/contacts/contact/${id}`)
+        const {data} = await instance.delete(`/contacts/${id}`)
         return data
     }catch(error){
         return thunkAPI.rejectWithValue(error.message)

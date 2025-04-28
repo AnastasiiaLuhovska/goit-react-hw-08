@@ -1,27 +1,22 @@
-import {Field, Form, Formik} from "formik";
+
+import {login} from "../../redux/auth/operations.js";
+import LoginForm from "../../components/LoginForm/LoginForm.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {selectIsLoggedIn} from "../../redux/auth/selectors.js";
+import {Navigate} from "react-router-dom";
 
 const LoginPage = () => {
-    const initialValues ={
-        email: '',
-        password: ''
+    const isLoggedIn = useSelector(selectIsLoggedIn)
+    const dispatch = useDispatch()
+
+    if(isLoggedIn){
+        return <Navigate to='/'/>
     }
-    const handleSubmit = (values, actions)=>{
-        console.log(values)
-        actions.resetForm()
+
+    const onSubmit = (values)=>{
+        dispatch(login(values))
     }
-    return <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form className='flex'>
-            <label className='block text-sm/6 font-medium text-gray-900'>
-                Email
-                <Field className= 'block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 outline-gray-300' name='email' type='email'/>
-            </label>
-            <label className='block text-sm/6 font-medium text-gray-900'>
-                Password
-                <Field className= 'block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 outline-gray-300' name='password' type='password'/>
-            </label>
-            <button type='submit'>Login</button>
-        </Form>
-    </Formik>;
+   return <LoginForm onSubmit={onSubmit}/>
 };
 
 export default LoginPage;
