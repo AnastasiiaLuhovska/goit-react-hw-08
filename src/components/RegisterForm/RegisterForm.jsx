@@ -1,4 +1,5 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
 
 const RegisterForm = ({ onSubmit }) => {
   const initialValues = {
@@ -10,9 +11,29 @@ const RegisterForm = ({ onSubmit }) => {
     options.resetForm();
     onSubmit(values);
   };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string().required("Email is required"),
+    password: Yup.string()
+      .min(7, "Password must be at least 7 characters long")
+      .matches(/[0-9]/, "Password must contain at least one number")
+      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least one symbol",
+      )
+      .required("Password is required"),
+  });
+
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form className="flex-column items-center">
+    <Formik
+      validationSchema={validationSchema}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+    >
+      <Form className="flex-column items-center w-50">
         <label className="block text-lg text-gray-900 mb-4">
           Name
           <Field
@@ -21,6 +42,11 @@ const RegisterForm = ({ onSubmit }) => {
             type="text"
           />
         </label>
+        <ErrorMessage
+          name="name"
+          component="p"
+          className="text-red-500 text-sm mt-1"
+        />
         <label className="block text-lg text-gray-900 mb-4">
           Email
           <Field
@@ -29,6 +55,11 @@ const RegisterForm = ({ onSubmit }) => {
             type="email"
           />
         </label>
+        <ErrorMessage
+          name="email"
+          component="p"
+          className="text-red-500 text-sm mt-1"
+        />
         <label className="block text-lg text-gray-900 mb-4">
           Password
           <Field
@@ -37,6 +68,11 @@ const RegisterForm = ({ onSubmit }) => {
             type="password"
           />
         </label>
+        <ErrorMessage
+          name="password"
+          component="p"
+          className="text-red-500 text-sm mt-1 "
+        />
         <button type="submit">Register</button>
       </Form>
     </Formik>

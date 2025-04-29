@@ -61,8 +61,9 @@ const slice = createSlice({
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        console.log(action.payload);
       })
-      .addCase(refresh.rejected, (state, action) => {
+      .addCase(refresh.rejected, (state) => {
         state.isLoggedIn = false;
         state.isRefreshing = false;
       })

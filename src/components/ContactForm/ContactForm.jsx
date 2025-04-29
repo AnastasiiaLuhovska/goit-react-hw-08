@@ -40,7 +40,11 @@ const ContactForm = () => {
             name="name"
           ></Field>
         </label>
-        <ErrorMessage className={s.error} name="name" component="p" />
+        <ErrorMessage
+          className="text-red-500 text-sm mt-1"
+          name="name"
+          component="p"
+        />
 
         <label className="block text-lg text-gray-900 mb-4">
           Number
@@ -50,7 +54,11 @@ const ContactForm = () => {
             name="number"
           ></Field>
         </label>
-        <ErrorMessage className={s.error} name="number" component="p" />
+        <ErrorMessage
+          className="text-red-500 text-sm mt-1"
+          name="number"
+          component="p"
+        />
 
         <button className="mx-auto block" type="submit">
           Add Contact
