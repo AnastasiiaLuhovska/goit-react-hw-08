@@ -1,10 +1,16 @@
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const AuthNav = () => {
-    return <>
-        <NavLink to='/login'>Login</NavLink>
-        <NavLink to='/register'>Register</NavLink>
-    </>;
+const AuthNav = ({ getNavLinkClass }) => {
+  return (
+    <div className="flex gap-4 items-center">
+      <NavLink to="/login" className={getNavLinkClass}>
+        Login
+      </NavLink>
+      <NavLink to="/register" className={getNavLinkClass}>
+        Register
+      </NavLink>
+    </div>
+  );
 };
 
 export default AuthNav;
