@@ -1,4 +1,5 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
 
 const LoginForm = ({ onSubmit }) => {
   const initialValues = {
@@ -9,8 +10,16 @@ const LoginForm = ({ onSubmit }) => {
     onSubmit(values);
     options.resetForm();
   };
+  const validationSchema = Yup.object({
+    email: Yup.string().required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik
+      validationSchema={validationSchema}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+    >
       <Form className="flex-column items-center">
         <label className="block text-lg text-gray-900 mb-4">
           Email
@@ -20,6 +29,11 @@ const LoginForm = ({ onSubmit }) => {
             type="email"
           />
         </label>
+        <ErrorMessage
+          className="text-red-500 text-sm mt-1"
+          name="email"
+          component="p"
+        />
         <label className="block text-lg text-gray-900 mb-4">
           Password
           <Field
@@ -28,6 +42,11 @@ const LoginForm = ({ onSubmit }) => {
             type="password"
           />
         </label>
+        <ErrorMessage
+          className="text-red-500 text-sm mt-1"
+          name="password"
+          component="p"
+        />
         <button type="submit">Login</button>
       </Form>
     </Formik>
