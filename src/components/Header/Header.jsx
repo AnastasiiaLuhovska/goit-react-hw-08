@@ -17,4 +17,3 @@ const Header = () => {
 
 export default Header;
 
-//oygui@gmail.com

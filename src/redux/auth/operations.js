@@ -21,6 +21,29 @@ export const login = createAsyncThunk('login', async (user, thunkAPI)=>{
         addToken(data.token)
         return data
     }catch(error){
+        return thunkAPI.rejectWithValue(error.message)
+    }
+})
+
+export const logout = createAsyncThunk('logout', async(_, thunkAPI)=>{
+    try{
+        await instance.post('/users/logout')
+        addToken('')
+    }catch(error){
         thunkAPI.rejectWithValue(error.message)
+    }
+})
+
+export const refresh = createAsyncThunk('refresh', async(_, thunkAPI)=>{
+    const token = thunkAPI.getState().auth.token
+
+    if(!token) return thunkAPI.rejectWithValue('no token')
+
+    addToken(token)
+    try{
+        const {data} = await instance.get('users/current')
+        return data
+    }catch(error){
+        return thunkAPI.rejectWithValue(error.message)
     }
 })

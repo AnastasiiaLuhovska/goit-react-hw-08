@@ -1,7 +1,7 @@
 import Contact from "../Contact/Contact.jsx";
 import {selectError, selectFilter, selectFilteredContacts, selectLoading} from "../../redux/contacts/selectors.js";
 import {useSelector} from "react-redux";
-import Loader from "../Loader.jsx";
+import Loader from "../Loader/Loader.jsx";
 
 const ContactList = () => {
     const filteredUserData = useSelector(selectFilteredContacts)

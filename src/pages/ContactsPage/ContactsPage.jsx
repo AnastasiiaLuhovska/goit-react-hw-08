@@ -10,7 +10,7 @@ import {Navigate} from "react-router-dom";
 
 const ContactsPage = () => {
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector(selectIsLoggedIn())
+    const isLoggedIn = useSelector(selectIsLoggedIn)
 
     useEffect(()=>{
         dispatch(fetchData())

@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {instance} from '../../api/api.js'
 
-export const fetchData = createAsyncThunk('fetchAll', async(query, thunkAPI)=>{
+export const fetchData = createAsyncThunk('fetchAll', async(_, thunkAPI)=>{
     try{
         const {data} = await instance.get('/contacts')
         return data
