@@ -17,12 +17,12 @@ const Contact = ({ user }) => {
 
   const { id, name, number } = user;
   return (
-    <li className="border border-gray-300 rounded p-8 flex-column mb-8">
+    <li className="border border-gray-300 rounded p-8 ">
       <p className="flex items-center">
         <FcBusinessman />
         {name}
       </p>
-      <p className="flex items-center">
+      <p className="flex items-center ">
         <FcIphone />
         {number}
       </p>

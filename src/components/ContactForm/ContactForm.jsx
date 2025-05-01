@@ -1,5 +1,4 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import s from "./ContactForm.module.css";
 import * as Yup from "yup";
 
 import { useDispatch } from "react-redux";
@@ -16,7 +15,7 @@ const ContactForm = () => {
       .max(50, "Too long Name")
       .required("This field is required"),
     number: Yup.string()
-      .matches(phoneRegExp, "Введіть коректний номер у форматі +380XXXXXXXXX")
+      .matches(phoneRegExp, "Enter a valid number in the format +380XXXXXXXXX")
       .required("This field is required"),
   });
 

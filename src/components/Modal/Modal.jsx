@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectContact } from "../../redux/contacts/selectors.js";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import s from "../ContactForm/ContactForm.module.css";
 import * as Yup from "yup";
 import { changeData } from "../../redux/contacts/operations.js";
 import { changeContact } from "../../redux/contacts/slice.js";
@@ -18,7 +17,7 @@ const Modal = () => {
       .max(50, "Too long Name")
       .required("This field is required"),
     number: Yup.string()
-      .matches(phoneRegExp, "Введіть коректний номер у форматі +380XXXXXXXXX")
+      .matches(phoneRegExp, "Enter a valid number in the format +380XXXXXXXXX")
       .required("This field is required"),
   });
 
@@ -72,7 +71,7 @@ const Modal = () => {
                         ></Field>
                       </label>
                       <ErrorMessage
-                        className={s.error}
+                          className="text-red-500 text-sm mt-1"
                         name="name"
                         component="p"
                       />
@@ -86,7 +85,7 @@ const Modal = () => {
                         ></Field>
                       </label>
                       <ErrorMessage
-                        className={s.error}
+                          className="text-red-500 text-sm mt-1"
                         name="number"
                         component="p"
                       />

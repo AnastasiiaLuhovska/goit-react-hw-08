@@ -26,7 +26,7 @@ const Header = () => {
           Home
         </NavLink>
 
-        {isLoggedIn && <p className="text-lg">Welcome, {name}</p>}
+        {isLoggedIn && <p className="text-[20px]">Welcome, {name}</p>}
         {isLoggedIn ? (
           <UserNav getNavLinkClass={getNavLinkClass} />
         ) : (
